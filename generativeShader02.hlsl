@@ -10,7 +10,7 @@ float3 palette (float t)
     return a + b* cos(6.28318*(c*t+d));
 }
 
-void mainImage( out float4 fragColor, in float2 fragCoord )
+
 {
     //Makes canvas 1:1 and centres coordinates
     float2 uv = (fragCoord* 2.0 - Resolution.xy)/Resolution.y;
