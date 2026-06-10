@@ -15,7 +15,7 @@ void mainImage( out float4 fragColor, in float2 fragCoord )
     //Makes canvas 1:1 and centres coordinates
     float2 uv = (fragCoord* 2.0 - Resolution.xy)/Resolution.y;
     float2 uv0 = uv;
-    float3 finalColour = float3(0.0);
+    float3 finalColour = float3(0.0, 0.0, 0.0);
     
     for (float i = 0.0; i < 1.5; i++)
     {
@@ -28,7 +28,7 @@ void mainImage( out float4 fragColor, in float2 fragCoord )
         float d = length(uv);
 
         //Assigns colour and offsets the gradient
-        float3 Colour = palette(length(uv0)+ i* 2.0 - Time* 0.5);
+        float3 Colour = Palette(length(uv0)+ i* 2.0 - Time* 0.5);
 
         //Frequency of circles according to sign function
         d -= sin(d * 20.0 + Time)/2.0;
