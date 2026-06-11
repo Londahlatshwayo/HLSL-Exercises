@@ -28,7 +28,7 @@ mat2 rot2D(float angle)
 
 
 //Cosine based palette function, 4 vec3 params
-float3 palette(float t)
+float3 Palette(float t)
 
 {
     float3 a = float3(.5, .5, .5);
@@ -75,18 +75,18 @@ float map(float3 Point)
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     // Normalized pixel coordinates (from 0 to 1)
-    vec2 uv =(fragCoord * 2. - iResolution.xy) / iResolution.y;
-    vec2 Mouse =(iMouse.xy * 2. - iResolution.xy) / iResolution.y;
+    float2 uv =(fragCoord * 2. - iResolution.xy) / iResolution.y;
+    float2 Mouse =(iMouse.xy * 2. - iResolution.xy) / iResolution.y;
     
     
     //Intialization
     // Ray origin
-    vec3 RayOrigin = vec3(0, 0, -4);
+    float3 RayOrigin = float3(0, 0, -4);
     
     // Ray direction    //This will allow us to control the perspective
-    vec3 RayDirection = normalize(vec3(uv * .9, 1));
+    float3 RayDirection = normalize(float3(uv * .9, 1));
     // Pixel colour
-    vec3 Colour = vec3(0);
+    float3 Colour = float3(0.0, 0.0, 0.0);
     
     // Total distance travelled
     float TotalDistance = 0.;
@@ -123,11 +123,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     }
     
    //Colour = palette(TotalDistance *.1);
-   Colour = palette(TotalDistance* .04 + float(i)* .005);
+   Colour = Palette(TotalDistance* .04 + float(i)* .005);
     
     
         
     
     // Output to screen
-    fragColor = vec4(Colour, 1);
+    return float4(Colour, 1);
 }
