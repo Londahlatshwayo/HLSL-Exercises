@@ -28,38 +28,38 @@ mat2 rot2D(float angle)
 
 
 //Cosine based palette function, 4 vec3 params
-vec3 palette(float t)
+float3 palette(float t)
 
 {
-    vec3 a = vec3(.5, .5, .5);
-    vec3 b = vec3(.8, .5, .5);
-    vec3 c = vec3(1., 1., 1.);
-    vec3 d = vec3(.8, .6, .5);
+    float3 a = float3(.5, .5, .5);
+    float3 b = float3(.8, .5, .5);
+    float3 c = float3(1., 1., 1.);
+    float3 d = float3(.8, .6, .5);
     return a + b*cos( 6.28318*(c*t+d) );
 }
 
 
-float map(vec3 Point)
+float map(float3 Point)
 {
-    vec3 SpherePos = vec3(0., 0 , sin(iTime)* 1.);
+    float3 SpherePos = float3(0., 0 , sin(iTime)* 1.);
     float Sphere = sdSphere(Point - SpherePos, .8);
     
     
-    vec3 q = Point;
+    float3 q = Point;
     //Whatever axis you omit, it will rotate by that axis
-    q.xy *= rot2D(iTime);
+    q.xy *= rot2D(Time);
     
     //Foward movement
-    Point.z += iTime * .4;
+    Point.z += Time * .4;
     
     //Space repetition
-    q = fract(Point) - .5;
+    q = frac(Point) - .5;
     
     
     //Multiplying the point by a value distorts the shape. Divide the output to reduce artifacts
-    //float Box = sdBox(Point* 1., vec3(.75))/ 4.;
+    //float Box = sdBox(Point* 1., float3(.75))/ 4.;
                             //Scaling cube size
-    float Box = sdBox(q, vec3(.05));
+    float Box = sdBox(q, float3(.05));
     
     //Adding the ground for blending //Positive value determine how much we push the ground down
     float Ground = Point.z + 1.;
