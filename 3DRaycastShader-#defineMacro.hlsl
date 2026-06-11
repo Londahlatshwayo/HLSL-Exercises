@@ -58,28 +58,28 @@ float3 finalColour =float3(0.0, 0.0, 0.0);
         //The ray need to hit something
         //Location if the point is behind the screen
         //Control the size of point at z(b) depth
-        float3 Point = float3(0.0, 0.0, 0.1 + sin(t));
+        float3 point = float3(0.0, 0.0, 0.1 + sin(t));
 
         //Calculate the vector between the cam vector to any point in 3D
-        float dist = Distance(raycast, raycastDirec, Point);
+        float distance = Distance(raycast, raycastDirec, point);
         
         //Assigns colour and offsets the gradient
-        float3 Colour = Palette(length(uv* dist)* 10.0 - Time* 0.5);
+        float3 Colour = Palette(length(uv* distance)* 10.0 - Time* 0.5);
         
         //Frequency of circles according to sign function
-        dist -= sin(dist * 100.0 + Time)/2.0;
+        distance -= sin(distance * 100.0 + Time)/2.0;
         
-        dist = pow(0.1/dist, 0.5);
+        distance = pow(0.1/distance, 0.5);
         
         
-        finalColour +=  dist* Colour;
+        finalColour +=  distance* Colour;
 
     
     //Output to screen
     //If the distance is close to the point, the colour will be darker
     //If the distance is far from the point, the colour will be lighter
     //Using smooth step to clamp the depth
-    dist = smoothstep(0.01, 0.8, dist);
+    distance = smoothstep(0.01, 0.8, distance);
     
     
     return float4(distance *finalColour, 1.0);
