@@ -41,7 +41,7 @@ float3 Palette(float t)
 
 float map(float3 Point)
 {
-    float3 SpherePos = float3(0., 0 , sin(iTime)* 1.);
+    float3 SpherePos = float3(0., 0 , sin(Time)* 1.);
     float Sphere = sdSphere(Point - SpherePos, .8);
     
     
@@ -59,7 +59,7 @@ float map(float3 Point)
     //Multiplying the point by a value distorts the shape. Divide the output to reduce artifacts
     //float Box = sdBox(Point* 1., float3(.75))/ 4.;
                             //Scaling cube size
-    float Box = sdBox(q, float3(.05));
+    float Box = sdBox(q, float3(.05, .05, .05));
     
     //Adding the ground for blending //Positive value determine how much we push the ground down
     float Ground = Point.z + 1.;
