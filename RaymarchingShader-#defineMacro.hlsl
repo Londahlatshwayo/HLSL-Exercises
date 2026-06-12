@@ -3,7 +3,7 @@
 #define smin(a, b, k) (min(a,b) - pow(max(k-abs((a)-(b)), 0.5)/k, 3.0) * k * (1.0/6.0))
 #define rot2D(angle) (float2x2(cos(angle), -sin(angle), sin(angle), cos(angle)))
 #define Palette(t) (float3(.5, .5, .5) + float3(.8, .5, .5) * -cos(6.28318 * (float3(1.0, 1.0, 1.0) * (t) + float3(.8, .6, .5))))
-#define map(Point) (sdSphere(Point - float3(0., 0 , sin(Time)* 1.), .8) + sdBox(frac(Point + float3(0., 0., Time * .4)) - .5, float3(.75, .75, .75)) / 4.)
+#define map(Point) (smin(sdSphere((Point) - float3(0., 0., sin(Time) * 1.), .8), sdBox(frac((Point) + float3(0., 0., Time * .4)) - .5, float3(.05, .05, .05)), 5.5))
 
 
 // Normalized pixel coordinates (from 0 to 1)
@@ -21,7 +21,7 @@
     // Total distance travelled
     float TotalDistance = 0.;
 
-    int i;
+    int i = 0;
     for (int i = 0; i < 85; i++)
     {
         // Raymarching
