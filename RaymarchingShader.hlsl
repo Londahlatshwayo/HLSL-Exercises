@@ -1,13 +1,13 @@
 //Sphere funtion
-float sdSphere(vec3 p, float s)
+float sdSphere(float3 p, float s)
 {
     return length(p) - s;
 }
 
 //BoxFunction
-float sdBox( vec3 p, vec3 b )
+float sdBox( float3 p, float3 b )
 {
-  vec3 q = abs(p) - b;
+  float3 q = abs(p) - b;
   return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
 }
 
